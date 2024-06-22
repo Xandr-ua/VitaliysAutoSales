@@ -114,8 +114,51 @@ resizableSwiper(
         loop: true,
         spaceBetween: 32,
         slidesPerView: 1,
+        navigation: {
+            nextEl: '.vehicles__slider-next',
+            prevEl: '.vehicles__slider-prev',
+        },
+        breakpoints: {
+            // when window width is >= 320px
+            320: {
+                slidesPerView: 1.3,
+                spaceBetween: 30
+            },
+            // when window width is >= 480px
+            480: {
+                slidesPerView: 1.5,
+                spaceBetween: 30
+            },
+            // when window width is >= 640px
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 30
+            }
+        }
     },
 );
+
+
+// Move Title in body styles
+
+function moveTitle() {
+    const bodyTitle = document.querySelector('.body-styles__title');
+    const bodyTitleOldInner = document.querySelector('.body-styles__title-inner');
+    const bodyTitleNewInner = document.querySelector('.body-styles__item-title');
+
+    if (window.innerWidth <= 768) {
+        bodyTitleOldInner.appendChild(bodyTitle);
+    } else if (window.innerWidth <= 992) {
+        bodyTitleOldInner.appendChild(bodyTitle);
+    } else if (window.innerWidth <= 1360) {
+        bodyTitleNewInner.appendChild(bodyTitle);
+    }
+}
+
+window.addEventListener('load', moveTitle);
+
+window.addEventListener('resize', moveTitle);
+
 
 // Slider Popular makes
 
@@ -126,7 +169,71 @@ const makesSlider = new Swiper(".makes__slider", {
         el: ".swiper-pagination",
         dynamicBullets: true,
     },
+    breakpoints: {
+        320: {
+            slidesPerView: 2.3,
+            spaceBetween: 30
+        },
+        480: {
+            slidesPerView: 3.5,
+            spaceBetween: 30
+        },
+        768: {
+            slidesPerView: 4,
+            spaceBetween: 30
+        },
+        1360: {
+            slidesPerView: 5,
+            spaceBetween: 30
+        }
+    }
 });
+
+// Slider Reviews
+
+const reviewsSlider = new Swiper(".reviews__slider", {
+    slidesPerView: 2.3,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+    },
+    breakpoints: {
+        320: {
+            slidesPerView: 1,
+        },
+        768: {
+            slidesPerView: 1.3,
+            spaceBetween: 30
+        },
+        1360: {
+            slidesPerView: 1.5,
+            spaceBetween: 30
+        },
+        1400: {
+            slidesPerView: 2.3,
+            spaceBetween: 30
+        }
+    }
+});
+
+// Product Cart Buttons
+
+function moveButtons() {
+    const buttons = document.querySelector('.catalog__cart-buttons');
+    const buttonsOldInner = document.querySelector('.catalog__cart-buttons-inner');
+    const buttonsNewInner = document.querySelector('.catalog__cart-buttons-mob');
+
+    if (window.innerWidth <= 992) {
+        buttonsNewInner.appendChild(buttons);
+    } else {
+        buttonsOldInner.appendChild(buttons);
+    }
+}
+
+window.addEventListener('load', moveButtons);
+
+window.addEventListener('resize', moveButtons);
 
 
 

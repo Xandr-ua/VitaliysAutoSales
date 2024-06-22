@@ -112,6 +112,38 @@ body {
   margin-bottom: 30px;
 }
 
+.slider-arrows {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1px solid #3E4350;
+  padding: 0;
+  transition: all 0.3s;
+}
+.slider-arrows:hover {
+  border-color: #51459E;
+  transition: all 0.3s;
+}
+.slider-arrows:hover svg path {
+  fill: #51459E;
+  transition: all 0.3s;
+}
+.slider-arrows svg path {
+  transition: all 0.3s;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #26292C;
+}
+.swiper-pagination-bullet-active {
+  background-color: #51459E;
+}
+
 .header__top {
   padding: 25px 0;
   background-color: #0D0D0D;
@@ -263,6 +295,20 @@ body {
 .vehicles {
   padding: 50px 0;
 }
+.vehicles__title-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.vehicles__title {
+  margin-bottom: 0;
+}
+.vehicles__slider-arrows-inner {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
 .vehicles__slider-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -270,7 +316,7 @@ body {
 }
 
 .car-card {
-  max-width: 290px;
+  width: 290px;
   border-radius: 5px;
   overflow: hidden;
   display: inline-block;
@@ -427,6 +473,9 @@ body {
 .makes__title {
   margin-bottom: 40px;
 }
+.makes__slider {
+  padding-bottom: 40px;
+}
 .makes__slider-item {
   height: auto;
   display: flex;
@@ -442,6 +491,69 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.reviews {
+  padding: 40px 0;
+}
+.reviews__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.reviews__slider {
+  padding-bottom: 50px;
+}
+.reviews__slider-item {
+  position: relative;
+  padding-bottom: 40px;
+}
+.reviews__block {
+  background-color: #1A1D1F;
+  padding: 34px 30px 50px 42px;
+  border-radius: 5px;
+  max-width: 550px;
+}
+.reviews__block-text {
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.28px;
+  margin-bottom: 16px;
+}
+.reviews__block-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.reviews__block-name {
+  color: #51459E;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
+  text-transform: uppercase;
+}
+.reviews__block-post {
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.14px;
+}
+.reviews__block-photo {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 20px;
+  bottom: 1%;
+}
+.reviews__block-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.reviews__star-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .about {
@@ -733,6 +845,33 @@ body {
   .vehicles__slider-item:last-child {
     display: none;
   }
+  .want-vehicle__wrap {
+    padding: 0 25px;
+  }
+  .want-vehicle__form .wpcf7-form {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 40px;
+    width: 294px;
+  }
+  .want-vehicle__form .wpcf7-form input[type=submit] {
+    margin-top: 0;
+  }
+  .want-vehicle__image {
+    height: 296px;
+  }
+  .body-styles {
+    padding: 56px 0;
+  }
+  .body-styles__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .body-styles__item-title {
+    display: flex;
+    align-items: flex-start;
+    max-width: 290px;
+  }
   .questions__wrap {
     gap: 60px;
   }
@@ -796,6 +935,9 @@ body {
   .top__filter-item:first-child {
     padding-left: 0;
   }
+  .vehicles {
+    padding: 40px 0;
+  }
   .vehicles__slider {
     padding: 0;
   }
@@ -809,6 +951,54 @@ body {
   .vehicles__slider-item {
     display: flex;
     justify-content: center;
+  }
+  .want-vehicle {
+    padding: 40px 0;
+  }
+  .want-vehicle__wrap {
+    padding: 0;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .want-vehicle__content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .want-vehicle__content-inner {
+    width: 50%;
+  }
+  .want-vehicle__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .want-vehicle__text {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .want-vehicle__form .wpcf7-form {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 40px;
+    width: 50%;
+  }
+  .want-vehicle__image {
+    height: 240px;
+    width: 100%;
+    order: -1;
+  }
+  .body-styles {
+    padding: 76px 0;
+  }
+  .body-styles__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .body-styles__item-title {
+    display: none;
+  }
+  .about {
+    padding: 92px 0;
   }
   .questions {
     padding: 40px 0 50px;
@@ -932,6 +1122,65 @@ body {
   .top__filter-btn {
     width: 100%;
   }
+  .vehicles__slider-arrows-inner {
+    display: flex;
+  }
+  .vehicles__slider-list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;
+  }
+  .car-card {
+    width: 100%;
+  }
+  .want-vehicle__content {
+    gap: 40px;
+    flex-direction: column;
+  }
+  .want-vehicle__content-inner {
+    width: 100%;
+  }
+  .want-vehicle__title {
+    text-align: center;
+  }
+  .want-vehicle__text {
+    text-align: center;
+  }
+  .want-vehicle__form .wpcf7-form {
+    width: 100%;
+  }
+  .want-vehicle__form .wpcf7-form p {
+    width: 100%;
+  }
+  .body-styles {
+    padding: 48px 0 105px;
+  }
+  .body-styles__link {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 174px;
+    position: relative;
+  }
+  .body-styles__text {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  .body-styles__images {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .makes__title {
+    text-align: center;
+  }
+  .about {
+    padding: 105px 0;
+  }
+  .about__text p {
+    font-size: 16px;
+  }
   .questions__wrap {
     padding: 0;
   }
@@ -970,7 +1219,7 @@ body {
     display: none;
   }
   .top {
-    margin-bottom: 365px;
+    margin-bottom: 300px;
     height: 290px;
   }
   .top__title {
@@ -982,6 +1231,39 @@ body {
   }
   .top__filter-item {
     padding-bottom: 20px;
+  }
+  .vehicles__slider-arrows-inner {
+    display: none;
+  }
+  .car-card {
+    width: 290px;
+  }
+  .body-styles {
+    padding: 50px 0;
+  }
+  .body-styles__list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .body-styles__link {
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: inherit;
+    height: 115px;
+  }
+  .body-styles__images {
+    position: inherit;
+    right: 0;
+    bottom: 0;
+  }
+  .about {
+    padding: 62px 0;
+  }
+  .about__title {
+    font-size: 40px;
+  }
+  .reviews__title {
+    font-size: 28px;
+    margin-bottom: 40px;
   }
   .questions {
     padding: 40px 0 70px;

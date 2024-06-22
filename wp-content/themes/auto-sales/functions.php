@@ -5,6 +5,7 @@ include 'inc/register-styles.php';
 include 'inc/acf.php';
 include 'inc/custom-type.php';
 include 'inc/menu.php';
+include 'inc/woocommerce.php';
 
 add_filter( 'show_admin_bar', '__return_false' );
 
@@ -40,4 +41,7 @@ add_action('admin_head', 'fix_svg_display');
 
 
 //add_filter( 'wpcf7_validate_configuration', '__return_false' );
+
+
+
 
