@@ -73,7 +73,7 @@
                         <?php endif;?>
                         <?php else : ?>
                             <?php if ($logo) : ?>
-                                <a class="logo" href="">
+                                <a class="logo" href="<?php echo home_url(); ?>">
                                     <?php
                                     $size = 'ful'; // (thumbnail, medium, large, full or custom size)
                                     echo wp_get_attachment_image($logo, $size, '', [

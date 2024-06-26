@@ -1,4 +1,45 @@
 
+
+function getUrlVars() {
+    const vars = {};
+    const parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+const catalogSort = document.querySelector('.catalog__sort');
+if (catalogSort) {
+    const sorting = getUrlVars()["orderby"];
+    let orderText = 'Sort by popularity';
+
+    if (sorting == 'date') {
+        orderText = 'Sort by latest';
+    } else if (sorting == 'price') {
+        orderText = 'Sort by price: low to high';
+    } else if (sorting == 'price-desc') {
+        orderText = 'Sort by price: high to low';
+    }
+
+    const parametr = document.getElementById('parametr');
+    if (parametr) {
+        parametr.textContent = orderText;
+        parametr.dataset.value = sorting;
+    }
+}
+
+const catalogSortItems = document.querySelectorAll('.catalog__sort li');
+for (let i = 0; i < catalogSortItems.length; i++) {
+    catalogSortItems[i].addEventListener('click', function() {
+        const parametr = document.getElementById('parametr');
+        if (parametr) {
+            parametr.textContent = this.querySelector('a').textContent;
+            window.location = 'http://auto/inventory/?orderby=' + this.querySelector('a').dataset.value;
+        }
+    });
+}
+
+
 // Header Menu
 
 const menuLists = document.querySelectorAll('.header__bottom-list');
@@ -165,6 +206,7 @@ window.addEventListener('resize', moveTitle);
 const makesSlider = new Swiper(".makes__slider", {
     slidesPerView: 6,
     spaceBetween: 30,
+    loop: false,
     pagination: {
         el: ".swiper-pagination",
         dynamicBullets: true,
@@ -224,10 +266,12 @@ function moveButtons() {
     const buttonsOldInner = document.querySelector('.catalog__cart-buttons-inner');
     const buttonsNewInner = document.querySelector('.catalog__cart-buttons-mob');
 
-    if (window.innerWidth <= 992) {
-        buttonsNewInner.appendChild(buttons);
-    } else {
-        buttonsOldInner.appendChild(buttons);
+    if (buttons != null && buttonsOldInner != null && buttonsNewInner != null) {
+        if (window.innerWidth <= 992) {
+            buttonsNewInner.appendChild(buttons);
+        } else {
+            buttonsOldInner.appendChild(buttons);
+        }
     }
 }
 
@@ -237,7 +281,80 @@ window.addEventListener('resize', moveButtons);
 
 
 
+const woocommerceProduct = new Swiper('.woocommerce-product-slider', {
+    pagination: {
+        el: ".woocommerce-product-slider-calc",
+        type: "fraction",
+        formatFractionCurrent: function (number) {
+            return ('' + number).slice(-2);
+        },
+        formatFractionTotal: function (number) {
+            return ('' + number).slice(-2);
+        },
+        renderFraction: function (currentClass, totalClass) {
+            return '<span class="' + currentClass + '"></span>' +
+                ' / ' +
+                '<span class="' + totalClass + '"></span>';
+        }
+    },
+    navigation: {
+        nextEl: '.woocommerce-product-slider-button-next',
+        prevEl: '.woocommerce-product-slider-button-prev',
+    },
+});
 
+// Product Cart Contacts
+
+function moveButtonsBox() {
+    const buttonsBox = document.querySelector('.product__slider-subbox');
+    const buttonsBoxOldInner = document.querySelector('.product__slider-subbox-inner');
+    const buttonsBoxNewInner = document.querySelector('.product__slider-subbox-mobile');
+
+    const titleInner = document.querySelector('.product__title-inner-box');
+    const titleInnerOldInner = document.querySelector('.product__title-inner');
+    const titleInnerNewInner = document.querySelector('.product__title-inner-mobile');
+
+    if (buttonsBox != null && buttonsBoxOldInner != null && buttonsBoxNewInner != null && titleInner != null && titleInnerOldInner != null && titleInnerNewInner != null) {
+        if (window.innerWidth <= 992) {
+            titleInnerNewInner.appendChild(titleInner);
+            buttonsBoxNewInner.appendChild(buttonsBox);
+        } else {
+            titleInnerOldInner.appendChild(titleInner);
+            buttonsBoxOldInner.appendChild(buttonsBox);
+        }
+    }
+}
+
+window.addEventListener('load', moveButtonsBox);
+
+window.addEventListener('resize', moveButtonsBox);
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const buyButtons = document.querySelectorAll('.catalog__cart-btn-buy');
+    const buyButtonsProduct = document.querySelectorAll('.product__cart-btn');
+    const hiddenField = document.querySelector('.wpcf7-hidden');
+
+    buyButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const productItem = button.closest('li');
+            const productNameElement = productItem.querySelector('.woocommerce-loop-product__title');
+            const productName = productNameElement ? productNameElement.textContent : '';
+            hiddenField.value = productName;
+        });
+    });
+
+    buyButtonsProduct.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // const productItem = button.closest('li');
+            const productNameElement = document.querySelector('.product_title');
+            const productName = productNameElement ? productNameElement.textContent : '';
+            hiddenField.value = productName;
+        });
+    });
+});
 
 
 

@@ -57,7 +57,14 @@ get_header( 'shop' );?>
                     <div class="catalog__search">
                         <?php echo get_product_search_form(false); ?>
                     </div>
-                    <div class="catalog__select">
+                    <div class="catalog__sort">
+                        <span><a href="#" data-value="popularity" id="parametr">Sort by popularity</a></span>
+                        <ul>
+                            <li><a href="#" data-value="popularity">Sort by popularity</a></li>
+                            <li><a href="#" data-value="date">Sort by latest</a></li>
+                            <li><a href="#" data-value="price">Sort by price: low to high</a></li>
+                            <li><a href="#" data-value="price-desc">Sort by price: high to low</a></li>
+                        </ul>
                         <?php
                         /**
                          * Hook: woocommerce_before_shop_loop.
@@ -66,7 +73,7 @@ get_header( 'shop' );?>
                          * @hooked woocommerce_result_count - 20
                          * @hooked woocommerce_catalog_ordering - 30
                          */
-                        do_action( 'woocommerce_before_shop_loop' );
+//                        do_action( 'woocommerce_before_shop_loop' );
                         ?>
                     </div>
                 </div>
@@ -141,5 +148,7 @@ get_header( 'shop' );?>
     <?php get_template_part('templates/form-questions') ?>
     <?php get_template_part('templates/map') ?>
 </main>
+
+
 
 <?php get_footer( 'shop' ); ?>

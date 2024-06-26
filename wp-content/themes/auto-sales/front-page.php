@@ -221,49 +221,36 @@ get_header() ?>
                 <?php endif; ?>
             </div>
                 <ul class="body-styles__list">
-                    <li class="body-styles__item body-styles__item-title">
-
-                    </li>
+                    <li class="body-styles__item body-styles__item-title"></li>
 
                     <?php
-                    $prod_cat_args = array(
-                        'taxonomy' => 'product_cat',
-                        'orderby' => 'id', // поле для сортування
-                        'hide_empty' => false, // приховувати категорії без товарів або ні
-                        'parent' => 0 // id батьківської категорії
-                    );
+                    $terms = get_field('body_style', 'option');
 
-                    $woo_categories = get_categories($prod_cat_args);
-                    foreach ($woo_categories as $woo_cat) :
-                        $woo_cat_id = $woo_cat->term_id; // id категорії
-                        $woo_cat_name = $woo_cat->name; // назва категорії
-                        $woo_cat_slug = $woo_cat->slug; // slug категорії
+                    if( $terms ): ?>
+                            <?php foreach( $terms as $term ):
+                                $terms_images = get_field('terms_images', $term);
+                            ?>
 
-                        // Перевірка, чи це дефолтна категорія (зазвичай це "Некатегоризовані")
-                        if ($woo_cat_name === 'Uncategorized') {
-                            continue;
-                        }
-
-                        $woo_cat_thumbnail_id = get_term_meta($woo_cat_id, 'thumbnail_id', true); // id зображення категорії
-                        $woo_cat_image_url = wp_get_attachment_url($woo_cat_thumbnail_id); // URL-адреса зображення категорії
-                        ?>
-                        <li class="body-styles__item">
-                            <a class="body-styles__link" href="<?php echo get_term_link($woo_cat_slug, 'product_cat'); ?>" target="_self">
+                                <li class="body-styles__item">
+                                    <a class="body-styles__link" href="<?php echo esc_url( get_term_link( $term ) ); ?>" target="_self">
                                 <span class="body-styles__text">
-                                    <?php echo $woo_cat_name; ?>
+                                    <?php echo esc_html( $term->name ); ?>
                                 </span>
-                                <?php if ($woo_cat_thumbnail_id): ?>
-                                    <span class="body-styles__images">
-                                        <?php echo wp_get_attachment_image($woo_cat_thumbnail_id, 'full', '', ['loading' => 'lazy']); ?>
+                                        <?php if ($terms_images): ?>
+                                            <span class="body-styles__images">
+                                        <?php echo wp_get_attachment_image($terms_images, 'full', '', ['loading' => 'lazy']); ?>
                                     </span>
-                                <?php endif; ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                    <?php endif; ?>
 
                 </ul>
         </div>
     </section>
+
+
 
     <section class="makes">
         <div class="container">
@@ -281,29 +268,38 @@ get_header() ?>
             ?>
             <div class="swiper makes__slider">
                 <ul class="swiper-wrapper makes__slider-list">
-                    <?php
-                        foreach ($popular_makes_items as $item) :
-                        $popular_makes_link = $item['popular_makes_items_link'];
-                        $popular_makes_link_url = $popular_makes_link['url'];
-                        $popular_makes_link_target = $popular_makes_link['target'];
 
-                        $popular_makes_items_img = $item['popular_makes_items_img'];
-                        if ($popular_makes_items_img) :
-                    ?>
-                    <li class="swiper-slide makes__slider-item">
-                        <a class="makes__slider-link"  href="<?php echo esc_attr($popular_makes_link_url) ; ?>" target="<?php echo $popular_makes_link_target; ?>">
-                            <?php
-                            $size = 'ful'; // (thumbnail, medium, large, full or custom size)
-                            echo wp_get_attachment_image($popular_makes_items_img, $size, '', [
-                                'loading' => 'lazy'
-                            ]);
-                            ?>
-                        </a>
-                    </li>
-                    <?php
-                        endif;
-                        endforeach;
-                    ?>
+                                        <?php
+                                        $prod_cat_args = array(
+                                            'taxonomy' => 'product_cat',
+                                            'orderby' => 'id',
+                                            'hide_empty' => false,
+                                            'parent' => 0
+                                        );
+
+                                        $woo_categories = get_categories($prod_cat_args);
+                                        foreach ($woo_categories as $woo_cat) :
+                                            $woo_cat_id = $woo_cat->term_id;
+                                            $woo_cat_name = $woo_cat->name;
+                                            $woo_cat_slug = $woo_cat->slug;
+
+                                            if ($woo_cat_name === 'Uncategorized') {
+                                                continue;
+                                            }
+
+                                            $woo_cat_thumbnail_id = get_term_meta($woo_cat_id, 'thumbnail_id', true);
+                                            $woo_cat_image_url = wp_get_attachment_url($woo_cat_thumbnail_id);
+                                            ?>
+
+                                            <?php if ($woo_cat_thumbnail_id): ?>
+                                            <li class="swiper-slide makes__slider-item">
+                                                <a class="makes__slider-link"  href="<?php echo get_term_link($woo_cat_slug, 'product_cat'); ?>">
+                                                    <?php echo wp_get_attachment_image($woo_cat_thumbnail_id, 'full', '', ['loading' => 'lazy']); ?>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+
+                                        <?php endforeach; ?>
                 </ul>
 
                 <div class="swiper-pagination"></div>

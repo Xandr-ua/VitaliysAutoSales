@@ -92,121 +92,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             </div>
         </div>
 
-        <ul class="catalog__cart-info">
-            <?php
-            $engine = get_field('engine');
-            if ($engine) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/engine.svg" alt="engine">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Engine
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $engine; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-
-            <?php
-            $exterior_color = get_field('exterior_color');
-            if ($exterior_color) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/pallete.svg" alt="engine">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Exterior Color
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $exterior_color; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-
-            <?php
-            $interior_color = get_field('interior_color');
-            if ($interior_color) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/interior-color.svg" alt="interior-color">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Interior Color
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $interior_color; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-
-            <?php
-            $transmission = get_field('transmission');
-            if ($transmission) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/transmission.svg" alt="transmission">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Transmission
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $transmission; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-
-            <?php
-            $drivetrain = get_field('drivetrain');
-            if ($drivetrain) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/catalog-drivetrain.svg" alt="drivetrain">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Drivetrain
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $drivetrain; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-
-            <?php
-            $fuel_economy = get_field('fuel_economy');
-            if ($fuel_economy) :
-                ?>
-                <li class="catalog__cart-info-item">
-                    <div class="catalog__cart-info-images">
-                        <img src="<?php echo get_stylesheet_directory_uri() ?>./assets/img/icons/catalog-fuel-economy.svg" alt="fuel-economy">
-                    </div>
-                    <div class="catalog__cart-info-content">
-                        <p class="catalog__cart-info-title">
-                            Fuel Economy
-                        </p>
-                        <p class="catalog__cart-info-text">
-                            <?php echo $fuel_economy; ?>
-                        </p>
-                    </div>
-                </li>
-            <?php endif; ?>
-        </ul>
+        <?php display_specific_product_attributes_in_shop_loop(); ?>
 
         <div class="catalog__cart-buttons-mob"></div>
     </div>
@@ -223,14 +109,16 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	?>
     <div class="catalog__cart-buttons-inner">
         <div class="catalog__cart-buttons">
-            <button class="catalog__cart-btn-buy" type="button">
+            <button class="catalog__cart-btn-buy cart-btn-buy" data-remodal-target="popup-seller" type="button">
                 <span>Buy the car</span>
             </button>
-            <button class="catalog__cart-btn-apply" type="button">
+            <button class="catalog__cart-btn-apply cart-btn-apply" type="button">
                 <span>Apply for Financing</span>
             </button>
         </div>
     </div>
 </li>
+
+
 
 

@@ -119,3 +119,28 @@
         </div>
     </div>
 </div>
+
+<div class="popup popup-seller remodal" data-remodal-id="popup-seller">
+    <button data-remodal-action="close" class="popup-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M21.7679 19.9996L29.1329 12.6346C29.6212 12.1462 29.6212 11.3546 29.1329 10.8663C28.6446 10.3779 27.8529 10.3779 27.3646 10.8663L19.9996 18.2312L12.6346 10.8663C12.1462 10.3779 11.3546 10.3779 10.8663 10.8663C10.3779 11.3546 10.3779 12.1462 10.8663 12.6346L18.2312 19.9996L10.8663 27.3646C10.3779 27.8529 10.3779 28.6446 10.8663 29.1329C11.1096 29.3762 11.4296 29.4996 11.7496 29.4996C12.0696 29.4996 12.3896 29.3779 12.6329 29.1329L19.9979 21.7679L27.3629 29.1329C27.6062 29.3762 27.9262 29.4996 28.2463 29.4996C28.5662 29.4996 28.8863 29.3779 29.1296 29.1329C29.6179 28.6446 29.6179 27.8529 29.1296 27.3646L21.7646 19.9996H21.7679Z" fill="white"></path>
+        </svg>
+    </button>
+    <p class="popup__title">
+        Contact seller
+    </p>
+
+    <?php
+    $phone = get_field('map_phone', 'option');
+    $phoneLink = preg_replace('/\D/', '', $phone);
+    if($phoneLink) :
+        ?>
+        <a class="popup__phone" href="tel:<?php echo $phoneLink; ?>">
+            Call <?php echo $phone; ?>
+        </a>
+    <?php endif;?>
+
+    <div class="popup__form">
+        <?php echo do_shortcode('[contact-form-7 id="c2f4321" title="Contact seller"]'); ?>
+    </div>
+</div>
